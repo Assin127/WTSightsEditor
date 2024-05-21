@@ -12,7 +12,8 @@ namespace WTSightsEditor
         private Bitmap workSpace;
         private Graphics graphics;
 
-        private float scale = 0.5f; // Текущий масштаб
+        // Текущий масштаб
+        private float scale = 0.5f;
 
         // Перемещение изображения
         private int offsetX = 0;
@@ -22,7 +23,9 @@ namespace WTSightsEditor
         {
             InitializeComponent();
             InitializeWorkSpace();
-            pictureBoxWorkSpace.Paint += PictureBoxWorkSpace_Paint; // Отрисовка
+
+            // Отрисовка
+            pictureBoxWorkSpace.Paint += PictureBoxWorkSpace_Paint;
 
             // Изменение размеров
             pictureBoxWorkSpace.Resize += PictureBoxWorkSpace_Resize;
@@ -37,20 +40,6 @@ namespace WTSightsEditor
             vScrollBar.Scroll += VScrollBar_Scroll;
             pictureBoxWorkSpace.MouseWheel += PictureBoxWorkSpace_MouseWheel;
             pictureBoxWorkSpace.Resize += PictureBoxWorkSpace_Resize;
-
-            hScrollBar.Minimum = -workSpace.Width;
-            hScrollBar.Maximum = workSpace.Width;
-            hScrollBar.Value = workSpace.Width / 2;
-            hScrollBar.Minimum = 0;
-            hScrollBar.SmallChange = 10;
-            hScrollBar.LargeChange = 50;
-
-            vScrollBar.Minimum = -workSpace.Height;
-            vScrollBar.Maximum = workSpace.Height;
-            vScrollBar.Value = workSpace.Height / 2;
-            vScrollBar.Minimum = 0;
-            vScrollBar.SmallChange = 10;
-            vScrollBar.LargeChange = 50;
         }
 
         /// <summary>
@@ -72,9 +61,9 @@ namespace WTSightsEditor
         {
             if (workSpace != null)
             {
-                // Вычисляем координаты для центрирования изображения с учетом смещения
                 int x = (pictureBoxWorkSpace.ClientSize.Width - (int)(workSpace.Width * scale)) / 2 + offsetX;
                 int y = (pictureBoxWorkSpace.ClientSize.Height - (int)(workSpace.Height * scale)) / 2 + offsetY;
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 e.Graphics.DrawImage(workSpace, x, y, workSpace.Width * scale, workSpace.Height * scale);
             }
         }
@@ -94,6 +83,9 @@ namespace WTSightsEditor
             vScrollBar.Height = pictureBoxWorkSpace.ClientSize.Height - hScrollBar.Height - menuStrip1.Height;
             vScrollBar.Left = pictureBoxWorkSpace.ClientSize.Width - vScrollBar.Width;
             vScrollBar.Top = menuStrip1.Height;
+
+            // Обновляем полосы прокрутки
+            UpdateScrollBars();
 
             // Обновляем изображение
             UpdateWorkSpace();
@@ -146,9 +138,8 @@ namespace WTSightsEditor
         {
             offsetX = 0;
             offsetY = 0;
-            hScrollBar.Value = workSpace.Width / 2 - offsetX;
-            vScrollBar.Value = workSpace.Height / 2 - offsetY;
             scale = 0.5f;
+            UpdateScrollBars();
             UpdateWorkSpace();
         }
 
@@ -159,7 +150,7 @@ namespace WTSightsEditor
         /// <param name="e"></param>
         private void HScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-            offsetX = -hScrollBar.Value + workSpace.Width / 2;
+            offsetX = -hScrollBar.Value;
             UpdateWorkSpace();
         }
 
@@ -170,7 +161,7 @@ namespace WTSightsEditor
         /// <param name="e"></param>
         private void VScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-            offsetY = -vScrollBar.Value + workSpace.Height / 2;
+            offsetY = -vScrollBar.Value;
             UpdateWorkSpace();
         }
 
@@ -181,19 +172,59 @@ namespace WTSightsEditor
         /// <param name="e"></param>
         private void PictureBoxWorkSpace_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (ModifierKeys == Keys.Shift)
+            if (ModifierKeys == Keys.Control)
+            {
+                // Рассчитываем новое значение масштаба
+                float newScale = scale * (e.Delta > 0 ? 1.1f : 0.9f);
+                newScale = Math.Max(0.01f, Math.Min(10.0f, newScale));
+
+                // Определяем положение курсора относительно изображения
+                float relativeX = (e.X - offsetX - pictureBoxWorkSpace.ClientSize.Width / 2f + workSpace.Width * scale / 2f) / scale;
+                float relativeY = (e.Y - offsetY - pictureBoxWorkSpace.ClientSize.Height / 2f + workSpace.Height * scale / 2f) / scale;
+
+                // Обновляем смещение, чтобы центрировать приближение на курсоре
+                offsetX = Math.Min((int)(workSpace.Width * scale), Math.Max((int)(-workSpace.Width * scale), e.X - (int)(relativeX * newScale) - pictureBoxWorkSpace.ClientSize.Width / 2 + (int)(workSpace.Width * newScale / 2)));
+                offsetY = Math.Min((int)(workSpace.Height * scale), Math.Max((int)(-workSpace.Height * scale), e.Y - (int)(relativeY * newScale) - pictureBoxWorkSpace.ClientSize.Height / 2 + (int)(workSpace.Height * newScale / 2)));
+
+                // Обновляем масштаб
+                scale = newScale;
+
+                // Обновляем полосы прокрутки
+                UpdateScrollBars();
+
+                // Обновляем изображение
+                UpdateWorkSpace();
+            }
+            else if (ModifierKeys == Keys.Shift)
             {
                 // Прокрутка по горизонтали
                 hScrollBar.Value = Math.Max(hScrollBar.Minimum, Math.Min(hScrollBar.Maximum, hScrollBar.Value - e.Delta));
-                offsetX = -hScrollBar.Value + workSpace.Width / 2;
+                offsetX = -hScrollBar.Value;
             }
             else
             {
                 // Прокрутка по вертикали
                 vScrollBar.Value = Math.Max(vScrollBar.Minimum, Math.Min(vScrollBar.Maximum, vScrollBar.Value - e.Delta));
-                offsetY = -vScrollBar.Value + workSpace.Height / 2;
+                offsetY = -vScrollBar.Value;
             }
             UpdateWorkSpace();
+        }
+
+        /// <summary>
+        /// Обновление скроллбаров в зависимости от масштаба изображения
+        /// </summary>
+        private void UpdateScrollBars()
+        {
+            hScrollBar.Minimum = Math.Min(0, (int)(-workSpace.Width * scale));
+            hScrollBar.Maximum = Math.Max(0, (int)(workSpace.Width * scale));
+            hScrollBar.LargeChange = (hScrollBar.Maximum - hScrollBar.Minimum) / 10;
+
+            vScrollBar.Minimum = Math.Min(0, (int)(-workSpace.Height * scale));
+            vScrollBar.Maximum = Math.Max(0, (int)(workSpace.Height * scale));
+            vScrollBar.LargeChange = (vScrollBar.Maximum - vScrollBar.Minimum) / 10;
+
+            hScrollBar.Value = Math.Max(hScrollBar.Minimum, Math.Min(hScrollBar.Maximum, -offsetX));
+            vScrollBar.Value = Math.Max(vScrollBar.Minimum, Math.Min(vScrollBar.Maximum, -offsetY));
         }
     }
 }
