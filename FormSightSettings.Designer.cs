@@ -53,8 +53,6 @@
             this.label1.Size = new System.Drawing.Size(75, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Resolution";
-            this.label1.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.label1.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // label2
             // 
@@ -66,8 +64,6 @@
             this.label2.Size = new System.Drawing.Size(54, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Vehicle";
-            this.label2.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.label2.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // checkBox1
             // 
@@ -81,8 +77,6 @@
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Vignette";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.checkBox1.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // comboBox1
             // 
@@ -93,8 +87,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(164, 24);
             this.comboBox1.TabIndex = 5;
-            this.comboBox1.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.comboBox1.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // checkBox2
             // 
@@ -108,8 +100,6 @@
             this.checkBox2.TabIndex = 6;
             this.checkBox2.Text = "Highlight";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.checkBox2.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // checkBox3
             // 
@@ -123,9 +113,6 @@
             this.checkBox3.TabIndex = 7;
             this.checkBox3.Text = "Center";
             this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            this.checkBox3.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.checkBox3.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // comboBox2
             // 
@@ -136,8 +123,6 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(164, 24);
             this.comboBox2.TabIndex = 8;
-            this.comboBox2.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.comboBox2.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // textBox1
             // 
@@ -147,8 +132,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(164, 23);
             this.textBox1.TabIndex = 9;
-            this.textBox1.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.textBox1.MouseHover += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // label3
             // 
@@ -160,8 +143,6 @@
             this.label3.Size = new System.Drawing.Size(71, 17);
             this.label3.TabIndex = 10;
             this.label3.Text = "Sensitivity";
-            this.label3.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.label3.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // button1
             // 
@@ -172,8 +153,6 @@
             this.button1.TabIndex = 11;
             this.button1.Text = "↓ Scroll down ↓";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // button2
             // 
@@ -184,8 +163,6 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "↑ Scroll up ↑";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.button2.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             // 
             // comboBox3
             // 
@@ -196,7 +173,6 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(164, 24);
             this.comboBox3.TabIndex = 13;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -234,8 +210,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Sight settings";
-            this.MouseEnter += new System.EventHandler(this.FormSightSettings_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.FormSightSettings_MouseLeave);
             this.ResumeLayout(false);
             this.PerformLayout();
 

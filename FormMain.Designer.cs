@@ -73,11 +73,11 @@
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.workSpace = new System.Windows.Forms.PictureBox();
-            this.image = new System.Windows.Forms.PictureBox();
+            this.pictureBoxWorkSpace = new System.Windows.Forms.PictureBox();
+            this.vScrollBar = new System.Windows.Forms.VScrollBar();
+            this.hScrollBar = new System.Windows.Forms.HScrollBar();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.workSpace)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWorkSpace)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -121,7 +121,6 @@
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -210,19 +209,18 @@
             // 
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
             resources.ApplyResources(this.zoomInToolStripMenuItem, "zoomInToolStripMenuItem");
-            this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+            this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.ZoomInToolStripMenuItem_Click);
             // 
             // zoomOutToolStripMenuItem
             // 
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
             resources.ApplyResources(this.zoomOutToolStripMenuItem, "zoomOutToolStripMenuItem");
-            this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
+            this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.ZoomOutToolStripMenuItem_Click);
             // 
             // zoomToWindowToolStripMenuItem
             // 
             this.zoomToWindowToolStripMenuItem.Name = "zoomToWindowToolStripMenuItem";
             resources.ApplyResources(this.zoomToWindowToolStripMenuItem, "zoomToWindowToolStripMenuItem");
-            this.zoomToWindowToolStripMenuItem.Click += new System.EventHandler(this.zoomToWindowToolStripMenuItem_Click);
             // 
             // layersToolStripMenuItem
             // 
@@ -292,21 +290,18 @@
             this.toolbarToolStripMenuItem.CheckOnClick = true;
             this.toolbarToolStripMenuItem.Name = "toolbarToolStripMenuItem";
             resources.ApplyResources(this.toolbarToolStripMenuItem, "toolbarToolStripMenuItem");
-            this.toolbarToolStripMenuItem.Click += new System.EventHandler(this.toolbarToolStripMenuItem_Click);
             // 
             // sightSettingsToolStripMenuItem
             // 
             this.sightSettingsToolStripMenuItem.CheckOnClick = true;
             this.sightSettingsToolStripMenuItem.Name = "sightSettingsToolStripMenuItem";
             resources.ApplyResources(this.sightSettingsToolStripMenuItem, "sightSettingsToolStripMenuItem");
-            this.sightSettingsToolStripMenuItem.Click += new System.EventHandler(this.sightSettingsToolStripMenuItem_Click);
             // 
             // layersVisibleToolStripMenuItem
             // 
             this.layersVisibleToolStripMenuItem.CheckOnClick = true;
             this.layersVisibleToolStripMenuItem.Name = "layersVisibleToolStripMenuItem";
             resources.ApplyResources(this.layersVisibleToolStripMenuItem, "layersVisibleToolStripMenuItem");
-            this.layersVisibleToolStripMenuItem.Click += new System.EventHandler(this.layersVisibleToolStripMenuItem_Click);
             // 
             // instrumentsToolStripMenuItem
             // 
@@ -322,7 +317,6 @@
             // 
             this.datamainConversionToolStripMenuItem.Name = "datamainConversionToolStripMenuItem";
             resources.ApplyResources(this.datamainConversionToolStripMenuItem, "datamainConversionToolStripMenuItem");
-            this.datamainConversionToolStripMenuItem.Click += new System.EventHandler(this.datamainConversionToolStripMenuItem_Click);
             // 
             // ballisticsCalculationToolStripMenuItem
             // 
@@ -361,41 +355,39 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // workSpace
+            // pictureBoxWorkSpace
             // 
-            this.workSpace.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.workSpace, "workSpace");
-            this.workSpace.Name = "workSpace";
-            this.workSpace.TabStop = false;
+            this.pictureBoxWorkSpace.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.pictureBoxWorkSpace, "pictureBoxWorkSpace");
+            this.pictureBoxWorkSpace.Name = "pictureBoxWorkSpace";
+            this.pictureBoxWorkSpace.TabStop = false;
             // 
-            // image
+            // vScrollBar
             // 
-            resources.ApplyResources(this.image, "image");
-            this.image.BackColor = System.Drawing.Color.White;
-            this.image.Name = "image";
-            this.image.TabStop = false;
-            this.image.SizeChanged += new System.EventHandler(this.image2_SizeChanged);
-            this.image.MouseDown += new System.Windows.Forms.MouseEventHandler(this.image_MouseDown);
-            this.image.MouseMove += new System.Windows.Forms.MouseEventHandler(this.image_MouseMove);
-            this.image.MouseUp += new System.Windows.Forms.MouseEventHandler(this.image_MouseUp);
+            resources.ApplyResources(this.vScrollBar, "vScrollBar");
+            this.vScrollBar.Name = "vScrollBar";
+            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.VScrollBar_Scroll);
+            // 
+            // hScrollBar
+            // 
+            resources.ApplyResources(this.hScrollBar, "hScrollBar");
+            this.hScrollBar.Name = "hScrollBar";
+            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HScrollBar_Scroll);
             // 
             // FormMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.Controls.Add(this.hScrollBar);
+            this.Controls.Add(this.vScrollBar);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.image);
-            this.Controls.Add(this.workSpace);
+            this.Controls.Add(this.pictureBoxWorkSpace);
             this.Name = "FormMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FormMain_Load);
-            this.LocationChanged += new System.EventHandler(this.Main_LocationChanged);
-            this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.workSpace)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWorkSpace)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -417,7 +409,7 @@
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sightSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolbarToolStripMenuItem;
-        private System.Windows.Forms.PictureBox workSpace;
+        private System.Windows.Forms.PictureBox pictureBoxWorkSpace;
         private System.Windows.Forms.ToolStripMenuItem layersVisibleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
@@ -443,11 +435,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.PictureBox image;
         private System.Windows.Forms.ToolStripMenuItem fCSManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem sightSettingsToolStripMenuItem1;
+        private System.Windows.Forms.VScrollBar vScrollBar;
+        private System.Windows.Forms.HScrollBar hScrollBar;
     }
 }
 
