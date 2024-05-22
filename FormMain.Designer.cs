@@ -51,19 +51,6 @@
             this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.flipHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flipVertialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rotate180ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sightSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.layersVisibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instrumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datamainConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ballisticsCalculationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,11 +60,18 @@
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBoxWorkSpace = new System.Windows.Forms.PictureBox();
             this.vScrollBar = new System.Windows.Forms.VScrollBar();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
+            this.buttonInterface = new System.Windows.Forms.PictureBox();
+            this.corner = new System.Windows.Forms.PictureBox();
+            this.pictureBoxWorkSpace = new System.Windows.Forms.PictureBox();
+            this.scaleBar = new System.Windows.Forms.TrackBar();
+            this.scaleLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonInterface)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWorkSpace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleBar)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -88,10 +82,9 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.layersToolStripMenuItem,
-            this.windowToolStripMenuItem,
             this.instrumentsToolStripMenuItem,
             this.helpToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -111,6 +104,7 @@
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             resources.ApplyResources(this.newToolStripMenuItem, "newToolStripMenuItem");
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -222,87 +216,6 @@
             this.zoomToWindowToolStripMenuItem.Name = "zoomToWindowToolStripMenuItem";
             resources.ApplyResources(this.zoomToWindowToolStripMenuItem, "zoomToWindowToolStripMenuItem");
             // 
-            // layersToolStripMenuItem
-            // 
-            this.layersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewToolStripMenuItem,
-            this.deleteToolStripMenuItem,
-            this.duplicateToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.flipHorizontalToolStripMenuItem,
-            this.flipVertialToolStripMenuItem,
-            this.rotateToolStripMenuItem,
-            this.rotate180ToolStripMenuItem});
-            this.layersToolStripMenuItem.Name = "layersToolStripMenuItem";
-            resources.ApplyResources(this.layersToolStripMenuItem, "layersToolStripMenuItem");
-            // 
-            // addNewToolStripMenuItem
-            // 
-            this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            resources.ApplyResources(this.addNewToolStripMenuItem, "addNewToolStripMenuItem");
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            resources.ApplyResources(this.deleteToolStripMenuItem, "deleteToolStripMenuItem");
-            // 
-            // duplicateToolStripMenuItem
-            // 
-            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            resources.ApplyResources(this.duplicateToolStripMenuItem, "duplicateToolStripMenuItem");
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // flipHorizontalToolStripMenuItem
-            // 
-            this.flipHorizontalToolStripMenuItem.Name = "flipHorizontalToolStripMenuItem";
-            resources.ApplyResources(this.flipHorizontalToolStripMenuItem, "flipHorizontalToolStripMenuItem");
-            // 
-            // flipVertialToolStripMenuItem
-            // 
-            this.flipVertialToolStripMenuItem.Name = "flipVertialToolStripMenuItem";
-            resources.ApplyResources(this.flipVertialToolStripMenuItem, "flipVertialToolStripMenuItem");
-            // 
-            // rotateToolStripMenuItem
-            // 
-            this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            resources.ApplyResources(this.rotateToolStripMenuItem, "rotateToolStripMenuItem");
-            // 
-            // rotate180ToolStripMenuItem
-            // 
-            this.rotate180ToolStripMenuItem.Name = "rotate180ToolStripMenuItem";
-            resources.ApplyResources(this.rotate180ToolStripMenuItem, "rotate180ToolStripMenuItem");
-            // 
-            // windowToolStripMenuItem
-            // 
-            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolbarToolStripMenuItem,
-            this.sightSettingsToolStripMenuItem,
-            this.layersVisibleToolStripMenuItem});
-            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
-            // 
-            // toolbarToolStripMenuItem
-            // 
-            this.toolbarToolStripMenuItem.CheckOnClick = true;
-            this.toolbarToolStripMenuItem.Name = "toolbarToolStripMenuItem";
-            resources.ApplyResources(this.toolbarToolStripMenuItem, "toolbarToolStripMenuItem");
-            // 
-            // sightSettingsToolStripMenuItem
-            // 
-            this.sightSettingsToolStripMenuItem.CheckOnClick = true;
-            this.sightSettingsToolStripMenuItem.Name = "sightSettingsToolStripMenuItem";
-            resources.ApplyResources(this.sightSettingsToolStripMenuItem, "sightSettingsToolStripMenuItem");
-            // 
-            // layersVisibleToolStripMenuItem
-            // 
-            this.layersVisibleToolStripMenuItem.CheckOnClick = true;
-            this.layersVisibleToolStripMenuItem.Name = "layersVisibleToolStripMenuItem";
-            resources.ApplyResources(this.layersVisibleToolStripMenuItem, "layersVisibleToolStripMenuItem");
-            // 
             // instrumentsToolStripMenuItem
             // 
             this.instrumentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -355,13 +268,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pictureBoxWorkSpace
-            // 
-            this.pictureBoxWorkSpace.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.pictureBoxWorkSpace, "pictureBoxWorkSpace");
-            this.pictureBoxWorkSpace.Name = "pictureBoxWorkSpace";
-            this.pictureBoxWorkSpace.TabStop = false;
-            // 
             // vScrollBar
             // 
             resources.ApplyResources(this.vScrollBar, "vScrollBar");
@@ -374,20 +280,56 @@
             this.hScrollBar.Name = "hScrollBar";
             this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HScrollBar_Scroll);
             // 
+            // buttonInterface
+            // 
+            resources.ApplyResources(this.buttonInterface, "buttonInterface");
+            this.buttonInterface.Name = "buttonInterface";
+            this.buttonInterface.TabStop = false;
+            // 
+            // corner
+            // 
+            resources.ApplyResources(this.corner, "corner");
+            this.corner.Name = "corner";
+            this.corner.TabStop = false;
+            // 
+            // pictureBoxWorkSpace
+            // 
+            this.pictureBoxWorkSpace.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.pictureBoxWorkSpace, "pictureBoxWorkSpace");
+            this.pictureBoxWorkSpace.Name = "pictureBoxWorkSpace";
+            this.pictureBoxWorkSpace.TabStop = false;
+            // 
+            // scaleBar
+            // 
+            resources.ApplyResources(this.scaleBar, "scaleBar");
+            this.scaleBar.Name = "scaleBar";
+            // 
+            // scaleLabel
+            // 
+            resources.ApplyResources(this.scaleLabel, "scaleLabel");
+            this.scaleLabel.Name = "scaleLabel";
+            // 
             // FormMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.Controls.Add(this.hScrollBar);
+            this.Controls.Add(this.scaleLabel);
+            this.Controls.Add(this.scaleBar);
             this.Controls.Add(this.vScrollBar);
+            this.Controls.Add(this.hScrollBar);
+            this.Controls.Add(this.buttonInterface);
+            this.Controls.Add(this.corner);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBoxWorkSpace);
             this.Name = "FormMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonInterface)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWorkSpace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,7 +340,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem layersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
@@ -406,12 +347,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sightSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolbarToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBoxWorkSpace;
-        private System.Windows.Forms.ToolStripMenuItem layersVisibleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
@@ -420,12 +356,6 @@
         private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToWindowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem flipHorizontalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem flipVertialToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rotate180ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instrumentsToolStripMenuItem;
@@ -434,13 +364,16 @@
         private System.Windows.Forms.ToolStripMenuItem paralaxToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem fCSManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem sightSettingsToolStripMenuItem1;
         private System.Windows.Forms.VScrollBar vScrollBar;
         private System.Windows.Forms.HScrollBar hScrollBar;
+        private System.Windows.Forms.PictureBox corner;
+        private System.Windows.Forms.PictureBox buttonInterface;
+        private System.Windows.Forms.TrackBar scaleBar;
+        private System.Windows.Forms.Label scaleLabel;
     }
 }
 

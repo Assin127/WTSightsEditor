@@ -82,12 +82,12 @@
     <Compile Include="FormSightSettings.Designer.cs">
       <DependentUpon>FormSightSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormToolbar.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="FormToolbar.Designer.cs">
-      <DependentUpon>FormToolbar.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Common.cs" />
     <EmbeddedResource Include="FormDatamineConversion.resx">
       <DependentUpon>FormDatamineConversion.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,23 +100,13 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.ru.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="FormSightSettings.resx">
       <DependentUpon>FormSightSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormToolbar.resx">
-      <DependentUpon>FormToolbar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -130,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Line.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

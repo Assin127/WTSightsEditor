@@ -40,8 +40,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Layers";
-            this.MouseEnter += new System.EventHandler(this.FormLayers_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.FormLayers_MouseLeave);
             this.ResumeLayout(false);
 
         }

@@ -16,15 +16,5 @@ namespace WTSightsEditor
         {
             InitializeComponent();
         }
-
-        private void FormLayers_MouseLeave(object sender, EventArgs e)
-        {
-            Opacity = Properties.Settings.Default.Opacity;
-        }
-
-        private void FormLayers_MouseEnter(object sender, EventArgs e)
-        {
-            Opacity = 1;
-        }
     }
 }

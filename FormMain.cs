@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace WTSightsEditor
 {
@@ -11,9 +9,12 @@ namespace WTSightsEditor
 
         private Bitmap workSpace;
         private Graphics graphics;
+        private bool mouseScroll = false;
+        private bool middleMouseDown = false;
+        private Point lastMousePosition;
 
-        // Текущий масштаб
-        private float scale = 0.5f;
+        // Масштаб
+        private float scale = Properties.Settings.Default.StartScale;
 
         // Перемещение изображения
         private int offsetX = 0;
@@ -24,11 +25,12 @@ namespace WTSightsEditor
             InitializeComponent();
             InitializeWorkSpace();
 
-            // Отрисовка
-            pictureBoxWorkSpace.Paint += PictureBoxWorkSpace_Paint;
+            Width = Common.GetWidth() / 2;
+            Height = Common.GetHeight() / 2;
 
-            // Изменение размеров
+            // Отрисовка
             pictureBoxWorkSpace.Resize += PictureBoxWorkSpace_Resize;
+            pictureBoxWorkSpace.Paint += PictureBoxWorkSpace_Paint;
 
             // Масштабирование
             zoomInToolStripMenuItem.Click += ZoomInToolStripMenuItem_Click;
@@ -39,7 +41,19 @@ namespace WTSightsEditor
             hScrollBar.Scroll += HScrollBar_Scroll;
             vScrollBar.Scroll += VScrollBar_Scroll;
             pictureBoxWorkSpace.MouseWheel += PictureBoxWorkSpace_MouseWheel;
-            pictureBoxWorkSpace.Resize += PictureBoxWorkSpace_Resize;
+            pictureBoxWorkSpace.MouseDown += PictureBoxWorkSpace_MouseDown;
+            pictureBoxWorkSpace.MouseMove += PictureBoxWorkSpace_MouseMove;
+            pictureBoxWorkSpace.MouseUp += PictureBoxWorkSpace_MouseUp;
+
+            // Настройки scaleBar
+            scaleBar.Minimum = -100; // 10% - минимальный масштаб
+            scaleBar.Maximum = 100; // 1000% - максимальный масштаб
+            scaleBar.Value = (int)(Math.Log10(scale) * 100); // начальное значение
+            scaleBar.TickFrequency = 10; // частота отметок
+            scaleBar.ValueChanged += ScaleBar_ValueChanged;
+
+            // Настройки scaleLabel
+            scaleLabel.Text = $"{Math.Round(scale * 100)}%";
         }
 
         /// <summary>
@@ -47,7 +61,7 @@ namespace WTSightsEditor
         /// </summary>
         private void InitializeWorkSpace()
         {
-            workSpace = new Bitmap(1920, 1080);
+            workSpace = new Bitmap(Common.GetWidth(), Common.GetHeight());
             graphics = Graphics.FromImage(workSpace);
             graphics.Clear(Color.White);
         }
@@ -77,12 +91,18 @@ namespace WTSightsEditor
         {
             // Обновляем размеры и положение полос прокрутки
             hScrollBar.Width = pictureBoxWorkSpace.ClientSize.Width - vScrollBar.Width;
-            hScrollBar.Top = pictureBoxWorkSpace.ClientSize.Height - hScrollBar.Height;
+            hScrollBar.Top = pictureBoxWorkSpace.ClientSize.Height - hScrollBar.Height - buttonInterface.Height;
             hScrollBar.Left = 0;
 
-            vScrollBar.Height = pictureBoxWorkSpace.ClientSize.Height - hScrollBar.Height - menuStrip1.Height;
+            vScrollBar.Height = pictureBoxWorkSpace.ClientSize.Height - hScrollBar.Height - menuStrip1.Height - buttonInterface.Height;
             vScrollBar.Left = pictureBoxWorkSpace.ClientSize.Width - vScrollBar.Width;
             vScrollBar.Top = menuStrip1.Height;
+
+            buttonInterface.Width = pictureBoxWorkSpace.ClientSize.Width;
+            buttonInterface.Top = pictureBoxWorkSpace.ClientSize.Height - buttonInterface.Height;
+            buttonInterface.Left = 0;
+            corner.Top = pictureBoxWorkSpace.ClientSize.Height - corner.Height - buttonInterface.Height;
+            corner.Left = pictureBoxWorkSpace.ClientSize.Width - corner.Width;
 
             // Обновляем полосы прокрутки
             UpdateScrollBars();
@@ -106,7 +126,9 @@ namespace WTSightsEditor
         /// <param name="e"></param>
         private void ZoomInToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeScale(1.1f);
+            // Рассчитываем новое значение масштаба
+            float newScale = Math.Max(0.1f, Math.Min(10.0f, scale * Properties.Settings.Default.Zoom));
+            scaleBar.Value = (int)(Math.Log10(newScale) * 100);
         }
 
         /// <summary>
@@ -116,17 +138,47 @@ namespace WTSightsEditor
         /// <param name="e"></param>
         private void ZoomOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeScale(1 / 1.1f);
+            // Рассчитываем новое значение масштаба
+            float newScale = Math.Max(0.1f, Math.Min(10.0f, scale / Properties.Settings.Default.Zoom));
+            scaleBar.Value = (int)(Math.Log10(newScale) * 100);
         }
 
         /// <summary>
-        /// Изменяем масштаб, не выходя за пределы от 1% до 1000%
+        /// Изменяем масштаб
         /// </summary>
         /// <param name="factor"></param>
-        private void ChangeScale(float factor)
+        private void ChangeScale(float newScale, int x, int y)
         {
-            scale = Math.Max(0.01f, Math.Min(10.0f, scale * factor));
+            if (mouseScroll)
+            {
+                x = MousePosition.X; y = MousePosition.Y;
+            }
+            // Определяем положение объекта относительно изображения
+            float relativeX = (x - offsetX - pictureBoxWorkSpace.ClientSize.Width / 2f + workSpace.Width * scale / 2f) / scale;
+            float relativeY = (y - offsetY - pictureBoxWorkSpace.ClientSize.Height / 2f + workSpace.Height * scale / 2f) / scale;
+
+            // Обновляем масштаб
+            scale = newScale;
+
+            // Обновляем смещение, чтобы центрировать приближение
+            offsetX = Math.Min((int)(workSpace.Width * scale), Math.Max((int)(-workSpace.Width * scale), x - (int)(relativeX * scale) - pictureBoxWorkSpace.ClientSize.Width / 2 + (int)(workSpace.Width * scale / 2)));
+            offsetY = Math.Min((int)(workSpace.Height * scale), Math.Max((int)(-workSpace.Height * scale), y - (int)(relativeY * scale) - pictureBoxWorkSpace.ClientSize.Height / 2 + (int)(workSpace.Height * scale / 2)));
+
+            scaleLabel.Text = $"{Math.Round(newScale * 100)}%";
+
+            UpdateScrollBars();
             UpdateWorkSpace();
+        }
+
+        /// <summary>
+        /// Изменение масштаба
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScaleBar_ValueChanged(object sender, EventArgs e)
+        {
+            float newScale = (float)Math.Pow(10, scaleBar.Value / 100f);
+            ChangeScale(newScale, (int)(pictureBoxWorkSpace.ClientSize.Width / 2f), (int)(pictureBoxWorkSpace.ClientSize.Height / 2f));
         }
 
         /// <summary>
@@ -138,13 +190,15 @@ namespace WTSightsEditor
         {
             offsetX = 0;
             offsetY = 0;
-            scale = 0.5f;
+            scale = Properties.Settings.Default.StartScale;
+            scaleBar.Value = (int)(Math.Log10(scale) * 100);
+            scaleLabel.Text = $"{Math.Round(scale * 100)}%";
             UpdateScrollBars();
             UpdateWorkSpace();
         }
 
         /// <summary>
-        /// Перемещение горизонтально при прокрутке колеса мыши
+        /// Перемещение ScrollBar горизонтально
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -155,7 +209,7 @@ namespace WTSightsEditor
         }
 
         /// <summary>
-        /// Перемещение вертикально при прокрутке колеса мыши
+        /// Перемещение ScrollBar вертикально
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -175,19 +229,12 @@ namespace WTSightsEditor
             if (ModifierKeys == Keys.Control)
             {
                 // Рассчитываем новое значение масштаба
-                float newScale = scale * (e.Delta > 0 ? 1.1f : 0.9f);
-                newScale = Math.Max(0.01f, Math.Min(10.0f, newScale));
+                float newScale = scale * (e.Delta > 0 ? Properties.Settings.Default.Zoom : 1 / Properties.Settings.Default.Zoom);
+                newScale = Math.Max(0.1f, Math.Min(10.0f, newScale));
 
-                // Определяем положение курсора относительно изображения
-                float relativeX = (e.X - offsetX - pictureBoxWorkSpace.ClientSize.Width / 2f + workSpace.Width * scale / 2f) / scale;
-                float relativeY = (e.Y - offsetY - pictureBoxWorkSpace.ClientSize.Height / 2f + workSpace.Height * scale / 2f) / scale;
-
-                // Обновляем смещение, чтобы центрировать приближение на курсоре
-                offsetX = Math.Min((int)(workSpace.Width * scale), Math.Max((int)(-workSpace.Width * scale), e.X - (int)(relativeX * newScale) - pictureBoxWorkSpace.ClientSize.Width / 2 + (int)(workSpace.Width * newScale / 2)));
-                offsetY = Math.Min((int)(workSpace.Height * scale), Math.Max((int)(-workSpace.Height * scale), e.Y - (int)(relativeY * newScale) - pictureBoxWorkSpace.ClientSize.Height / 2 + (int)(workSpace.Height * newScale / 2)));
-
-                // Обновляем масштаб
-                scale = newScale;
+                mouseScroll = true;
+                scaleBar.Value = (int)(Math.Log10(newScale) * 100);
+                mouseScroll = false;
 
                 // Обновляем полосы прокрутки
                 UpdateScrollBars();
@@ -225,6 +272,78 @@ namespace WTSightsEditor
 
             hScrollBar.Value = Math.Max(hScrollBar.Minimum, Math.Min(hScrollBar.Maximum, -offsetX));
             vScrollBar.Value = Math.Max(vScrollBar.Minimum, Math.Min(vScrollBar.Maximum, -offsetY));
+        }
+
+        /// <summary>
+        /// Зажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PictureBoxWorkSpace_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                middleMouseDown = true;
+                lastMousePosition.X = e.X;
+                lastMousePosition.Y = e.Y;
+                Cursor = Cursors.Hand;
+            }
+        }
+
+        /// <summary>
+        /// Перемещение изображения с помощью средней кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PictureBoxWorkSpace_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (middleMouseDown)
+            {
+                // Вычисляем смещение
+                int deltaX = e.X - lastMousePosition.X;
+                int deltaY = e.Y - lastMousePosition.Y;
+
+                // Обновляем смещение
+                offsetX += deltaX;
+                offsetY += deltaY;
+
+                // Сохраняем текущую позицию мыши
+                lastMousePosition = e.Location;
+
+                // Обновляем изображение
+                UpdateWorkSpace();
+            }
+        }
+
+        /// <summary>
+        /// Отпускание кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PictureBoxWorkSpace_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                middleMouseDown = false;
+                Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Инициализация нового файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to create a new file? Unsaved changes will be lost.", "Confirm New File", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Перезапуск приложения
+                Application.Restart();
+                Environment.Exit(0);
+            }
         }
     }
 }

@@ -25,13 +25,25 @@ namespace WTSightsEditor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
-        public double Opacity {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
+        public float StartScale {
             get {
-                return ((double)(this["Opacity"]));
+                return ((float)(this["StartScale"]));
             }
             set {
-                this["Opacity"] = value;
+                this["StartScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.1")]
+        public float Zoom {
+            get {
+                return ((float)(this["Zoom"]));
+            }
+            set {
+                this["Zoom"] = value;
             }
         }
         
@@ -44,18 +56,6 @@ namespace WTSightsEditor.Properties {
             }
             set {
                 this["InterfaceSpacing"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.1")]
-        public double Zoom {
-            get {
-                return ((double)(this["Zoom"]));
-            }
-            set {
-                this["Zoom"] = value;
             }
         }
     }
