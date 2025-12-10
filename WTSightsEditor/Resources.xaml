@@ -1,0 +1,92 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- English Resources -->
+    <system:String x:Key="MenuFile">File</system:String>
+    <system:String x:Key="MenuFileNew">New</system:String>
+    <system:String x:Key="MenuFileOpen">Open...</system:String>
+    <system:String x:Key="MenuFileSave">Save</system:String>
+    <system:String x:Key="MenuFileSaveAs">Save As...</system:String>
+    <system:String x:Key="MenuFileImport">Import...</system:String>
+    <system:String x:Key="MenuFileExport">Export...</system:String>
+    <system:String x:Key="MenuFileRecent">Recent Files</system:String>
+    <system:String x:Key="MenuFileExit">Exit</system:String>
+
+    <system:String x:Key="MenuEdit">Edit</system:String>
+    <system:String x:Key="MenuEditUndo">Undo</system:String>
+    <system:String x:Key="MenuEditRedo">Redo</system:String>
+    <system:String x:Key="MenuEditCut">Cut</system:String>
+    <system:String x:Key="MenuEditCopy">Copy</system:String>
+    <system:String x:Key="MenuEditPaste">Paste</system:String>
+    <system:String x:Key="MenuEditFind">Find</system:String>
+    <system:String x:Key="MenuEditReplace">Replace</system:String>
+    <system:String x:Key="MenuEditPreferences">Preferences</system:String>
+
+    <system:String x:Key="MenuView">View</system:String>
+    <system:String x:Key="MenuViewZoomIn">Zoom In</system:String>
+    <system:String x:Key="MenuViewZoomOut">Zoom Out</system:String>
+    <system:String x:Key="MenuViewResetZoom">Reset Zoom</system:String>
+    <system:String x:Key="MenuViewGrid">Show Grid</system:String>
+    <system:String x:Key="MenuViewCrosshair">Show Crosshair</system:String>
+    <system:String x:Key="MenuViewFullscreen">Fullscreen</system:String>
+
+    <system:String x:Key="MenuTools">Tools</system:String>
+    <system:String x:Key="MenuToolsDatamine">Datamine Converter</system:String>
+    <system:String x:Key="MenuToolsBallistic">Ballistic Calculator</system:String>
+    <system:String x:Key="MenuToolsArmorPen">Armor Penetration Calculator</system:String>
+
+    <system:String x:Key="MenuFileSettings">Settings</system:String>
+
+    <system:String x:Key="MenuHelp">Help</system:String>
+    <system:String x:Key="MenuHelpDocumentation">Documentation</system:String>
+    <system:String x:Key="MenuHelpSamples">Sample Sights</system:String>
+    <system:String x:Key="MenuHelpAbout">About</system:String>
+
+    <!-- Toolbar -->
+    <system:String x:Key="ToolbarNew">New Sight</system:String>
+    <system:String x:Key="ToolbarOpen">Open Sight</system:String>
+    <system:String x:Key="ToolbarSave">Save Sight</system:String>
+    <system:String x:Key="ToolbarUndo">Undo</system:String>
+    <system:String x:Key="ToolbarRedo">Redo</system:String>
+    <system:String x:Key="ToolbarZoomIn">Zoom In</system:String>
+    <system:String x:Key="ToolbarZoomOut">Zoom Out</system:String>
+    <system:String x:Key="ToolbarResetZoom">Reset Zoom</system:String>
+    <system:String x:Key="ToolbarGrid">Toggle Grid</system:String>
+    <system:String x:Key="ToolbarValidate">Validate</system:String>
+    <system:String x:Key="ToolbarPreview">Preview</system:String>
+
+    <!-- Panels -->
+    <system:String x:Key="FileExplorer">File Explorer</system:String>
+    <system:String x:Key="Folders">Folders</system:String>
+    <system:String x:Key="RecentFiles">Recent Files</system:String>
+
+    <system:String x:Key="CodeEditor">Code Editor</system:String>
+
+    <system:String x:Key="CustomSightsEditor">Custom Sights Editor</system:String>
+    <system:String x:Key="TabElements">Elements</system:String>
+    <system:String x:Key="TabProperties">Properties</system:String>
+    <system:String x:Key="TabLayers">Layers</system:String>
+
+    <!-- Drawing Tools -->
+    <system:String x:Key="ToolLine">Line</system:String>
+    <system:String x:Key="ToolCircle">Circle</system:String>
+    <system:String x:Key="ToolRectangle">Rectangle</system:String>
+    <system:String x:Key="ToolText">Text</system:String>
+    <system:String x:Key="ToolSelect">Select</system:String>
+    <system:String x:Key="ToolMove">Move</system:String>
+    <system:String x:Key="ToolClone">Clone</system:String>
+    <system:String x:Key="ToolDelete">Delete</system:String>
+    
+    <!-- Status messages -->
+    <system:String x:Key="StatusReady">Ready</system:String>
+    <system:String x:Key="StatusError">Error</system:String>
+    <system:String x:Key="StatusSaving">Saving...</system:String>
+    <system:String x:Key="StatusLoading">Loading...</system:String>
+
+    <!-- Resolution display -->
+    <system:String x:Key="Resolution">Resolution:</system:String>
+
+    <!-- Updated menu items -->
+    <system:String x:Key="MenuToolsCustomEditor">Custom Sights Editor</system:String>
+</ResourceDictionary>
