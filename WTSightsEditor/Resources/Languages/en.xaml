@@ -2,7 +2,50 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <!-- English Resources -->
+    <!-- Window titles -->
+    <system:String x:Key="MainWindowTitle">War Thunder Sights Editor</system:String>
+    <system:String x:Key="CreateProjectWindowTitle">Create/Open Project</system:String>
+
+    <!-- Common buttons -->
+    <system:String x:Key="ButtonOK">OK</system:String>
+    <system:String x:Key="ButtonCancel">Cancel</system:String>
+    <system:String x:Key="ButtonBrowse">Browse...</system:String>
+    <system:String x:Key="ButtonCreate">Create</system:String>
+    <system:String x:Key="ButtonOpen">Open</system:String>
+    <system:String x:Key="ButtonBack">Back</system:String>
+    <system:String x:Key="ButtonSettings">Settings</system:String>
+
+    <!-- Welcome screen -->
+    <system:String x:Key="WelcomeTitle">Welcome to War Thunder Sights Editor</system:String>
+    <system:String x:Key="WelcomeSubtitle">Create or open a project to start editing</system:String>
+    <system:String x:Key="NewProject">New Project</system:String>
+    <system:String x:Key="OpenProject">Open Project</system:String>
+    <system:String x:Key="RecentProjects">Recent Projects</system:String>
+    <system:String x:Key="NoRecentProjects">No recent projects</system:String>
+
+    <!-- Project creation -->
+    <system:String x:Key="ProjectName">Project Name</system:String>
+    <system:String x:Key="GameFolder">Game Folder</system:String>
+    <system:String x:Key="DatamineFolder">Datamine Folder</system:String>
+    <system:String x:Key="DataFolder">Data Folder</system:String>
+    <system:String x:Key="BallisticFolder">Ballistic Folder</system:String>
+    <system:String x:Key="RequiredField">Required field</system:String>
+    <system:String x:Key="FolderNotExist">Folder does not exist</system:String>
+    <system:String x:Key="GameExeNotFound">War Thunder executable not found in selected folder</system:String>
+
+    <!-- File Explorer -->
+    <system:String x:Key="FileExplorerTitle">File Explorer</system:String>
+    <system:String x:Key="FilterPlaceholder">Filter files (e.g., *.txt or FCS*)...</system:String>
+    <system:String x:Key="RecentFilesList">Recent Files</system:String>
+    <!-- Изменил ключ -->
+
+    <!-- Messages -->
+    <system:String x:Key="ProjectCreatedSuccess">Project created successfully</system:String>
+    <system:String x:Key="ProjectOpenedSuccess">Project opened successfully</system:String>
+    <system:String x:Key="ErrorTitle">Error</system:String>
+
+    <!-- Original Resources -->
+    <!-- Menu File -->
     <system:String x:Key="MenuFile">File</system:String>
     <system:String x:Key="MenuFileNew">New</system:String>
     <system:String x:Key="MenuFileOpen">Open...</system:String>
@@ -11,8 +54,11 @@
     <system:String x:Key="MenuFileImport">Import...</system:String>
     <system:String x:Key="MenuFileExport">Export...</system:String>
     <system:String x:Key="MenuFileRecent">Recent Files</system:String>
+    <!-- Оригинальный ключ -->
     <system:String x:Key="MenuFileExit">Exit</system:String>
+    <system:String x:Key="MenuFileSettings">Settings</system:String>
 
+    <!-- Menu Edit -->
     <system:String x:Key="MenuEdit">Edit</system:String>
     <system:String x:Key="MenuEditUndo">Undo</system:String>
     <system:String x:Key="MenuEditRedo">Redo</system:String>
@@ -23,6 +69,7 @@
     <system:String x:Key="MenuEditReplace">Replace</system:String>
     <system:String x:Key="MenuEditPreferences">Preferences</system:String>
 
+    <!-- Menu View -->
     <system:String x:Key="MenuView">View</system:String>
     <system:String x:Key="MenuViewZoomIn">Zoom In</system:String>
     <system:String x:Key="MenuViewZoomOut">Zoom Out</system:String>
@@ -31,13 +78,14 @@
     <system:String x:Key="MenuViewCrosshair">Show Crosshair</system:String>
     <system:String x:Key="MenuViewFullscreen">Fullscreen</system:String>
 
+    <!-- Menu Tools -->
     <system:String x:Key="MenuTools">Tools</system:String>
     <system:String x:Key="MenuToolsDatamine">Datamine Converter</system:String>
     <system:String x:Key="MenuToolsBallistic">Ballistic Calculator</system:String>
     <system:String x:Key="MenuToolsArmorPen">Armor Penetration Calculator</system:String>
+    <system:String x:Key="MenuToolsCustomEditor">Custom Sights Editor</system:String>
 
-    <system:String x:Key="MenuFileSettings">Settings</system:String>
-
+    <!-- Menu Help -->
     <system:String x:Key="MenuHelp">Help</system:String>
     <system:String x:Key="MenuHelpDocumentation">Documentation</system:String>
     <system:String x:Key="MenuHelpSamples">Sample Sights</system:String>
@@ -59,10 +107,7 @@
     <!-- Panels -->
     <system:String x:Key="FileExplorer">File Explorer</system:String>
     <system:String x:Key="Folders">Folders</system:String>
-    <system:String x:Key="RecentFiles">Recent Files</system:String>
-
     <system:String x:Key="CodeEditor">Code Editor</system:String>
-
     <system:String x:Key="CustomSightsEditor">Custom Sights Editor</system:String>
     <system:String x:Key="TabElements">Elements</system:String>
     <system:String x:Key="TabProperties">Properties</system:String>
@@ -77,7 +122,7 @@
     <system:String x:Key="ToolMove">Move</system:String>
     <system:String x:Key="ToolClone">Clone</system:String>
     <system:String x:Key="ToolDelete">Delete</system:String>
-    
+
     <!-- Status messages -->
     <system:String x:Key="StatusReady">Ready</system:String>
     <system:String x:Key="StatusError">Error</system:String>
@@ -87,6 +132,4 @@
     <!-- Resolution display -->
     <system:String x:Key="Resolution">Resolution:</system:String>
 
-    <!-- Updated menu items -->
-    <system:String x:Key="MenuToolsCustomEditor">Custom Sights Editor</system:String>
 </ResourceDictionary>

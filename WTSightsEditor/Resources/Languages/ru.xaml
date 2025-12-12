@@ -1,0 +1,135 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Window titles -->
+    <system:String x:Key="MainWindowTitle">Редактор прицелов War Thunder</system:String>
+    <system:String x:Key="CreateProjectWindowTitle">Создать/Открыть проект</system:String>
+
+    <!-- Common buttons -->
+    <system:String x:Key="ButtonOK">ОК</system:String>
+    <system:String x:Key="ButtonCancel">Отмена</system:String>
+    <system:String x:Key="ButtonBrowse">Обзор...</system:String>
+    <system:String x:Key="ButtonCreate">Создать</system:String>
+    <system:String x:Key="ButtonOpen">Открыть</system:String>
+    <system:String x:Key="ButtonBack">Назад</system:String>
+    <system:String x:Key="ButtonSettings">Настройки</system:String>
+
+    <!-- Welcome screen -->
+    <system:String x:Key="WelcomeTitle">Добро пожаловать в редактор прицелов War Thunder</system:String>
+    <system:String x:Key="WelcomeSubtitle">Создайте или откройте проект для начала редактирования</system:String>
+    <system:String x:Key="NewProject">Новый проект</system:String>
+    <system:String x:Key="OpenProject">Открыть проект</system:String>
+    <system:String x:Key="RecentProjects">Недавние проекты</system:String>
+    <system:String x:Key="NoRecentProjects">Нет недавних проектов</system:String>
+
+    <!-- Project creation -->
+    <system:String x:Key="ProjectName">Название проекта</system:String>
+    <system:String x:Key="GameFolder">Папка игры</system:String>
+    <system:String x:Key="DatamineFolder">Папка датамайна</system:String>
+    <system:String x:Key="DataFolder">Папка данных</system:String>
+    <system:String x:Key="BallisticFolder">Папка баллистики</system:String>
+    <system:String x:Key="RequiredField">Обязательное поле</system:String>
+    <system:String x:Key="FolderNotExist">Папка не существует</system:String>
+    <system:String x:Key="GameExeNotFound">Исполняемый файл War Thunder не найден в выбранной папке</system:String>
+
+    <!-- File Explorer -->
+    <system:String x:Key="FileExplorerTitle">Проводник файлов</system:String>
+    <system:String x:Key="FilterPlaceholder">Фильтр файлов (например, *.txt или FCS*)...</system:String>
+    <system:String x:Key="RecentFilesList">Недавние файлы</system:String>
+    <!-- Изменил ключ -->
+
+    <!-- Messages -->
+    <system:String x:Key="ProjectCreatedSuccess">Проект успешно создан</system:String>
+    <system:String x:Key="ProjectOpenedSuccess">Проект успешно открыт</system:String>
+    <system:String x:Key="ErrorTitle">Ошибка</system:String>
+
+    <!-- Original Resources -->
+    <!-- Menu File -->
+    <system:String x:Key="MenuFile">Файл</system:String>
+    <system:String x:Key="MenuFileNew">Создать</system:String>
+    <system:String x:Key="MenuFileOpen">Открыть...</system:String>
+    <system:String x:Key="MenuFileSave">Сохранить</system:String>
+    <system:String x:Key="MenuFileSaveAs">Сохранить как...</system:String>
+    <system:String x:Key="MenuFileImport">Импорт...</system:String>
+    <system:String x:Key="MenuFileExport">Экспорт...</system:String>
+    <system:String x:Key="MenuFileRecent">Недавние файлы</system:String>
+    <!-- Оригинальный ключ -->
+    <system:String x:Key="MenuFileExit">Выход</system:String>
+    <system:String x:Key="MenuFileSettings">Настройки</system:String>
+
+    <!-- Menu Edit -->
+    <system:String x:Key="MenuEdit">Правка</system:String>
+    <system:String x:Key="MenuEditUndo">Отменить</system:String>
+    <system:String x:Key="MenuEditRedo">Вернуть</system:String>
+    <system:String x:Key="MenuEditCut">Вырезать</system:String>
+    <system:String x:Key="MenuEditCopy">Копировать</system:String>
+    <system:String x:Key="MenuEditPaste">Вставить</system:String>
+    <system:String x:Key="MenuEditFind">Найти</system:String>
+    <system:String x:Key="MenuEditReplace">Заменить</system:String>
+    <system:String x:Key="MenuEditPreferences">Параметры</system:String>
+
+    <!-- Menu View -->
+    <system:String x:Key="MenuView">Вид</system:String>
+    <system:String x:Key="MenuViewZoomIn">Увеличить</system:String>
+    <system:String x:Key="MenuViewZoomOut">Уменьшить</system:String>
+    <system:String x:Key="MenuViewResetZoom">Сбросить масштаб</system:String>
+    <system:String x:Key="MenuViewGrid">Показать сетку</system:String>
+    <system:String x:Key="MenuViewCrosshair">Показать перекрестие</system:String>
+    <system:String x:Key="MenuViewFullscreen">Полный экран</system:String>
+
+    <!-- Menu Tools -->
+    <system:String x:Key="MenuTools">Инструменты</system:String>
+    <system:String x:Key="MenuToolsDatamine">Конвертер датамайна</system:String>
+    <system:String x:Key="MenuToolsBallistic">Калькулятор баллистики</system:String>
+    <system:String x:Key="MenuToolsArmorPen">Калькулятор бронепробития</system:String>
+    <system:String x:Key="MenuToolsCustomEditor">Редактор кастомных прицелов</system:String>
+
+    <!-- Menu Help -->
+    <system:String x:Key="MenuHelp">Справка</system:String>
+    <system:String x:Key="MenuHelpDocumentation">Документация</system:String>
+    <system:String x:Key="MenuHelpSamples">Примеры прицелов</system:String>
+    <system:String x:Key="MenuHelpAbout">О программе</system:String>
+
+    <!-- Toolbar -->
+    <system:String x:Key="ToolbarNew">Новый прицел</system:String>
+    <system:String x:Key="ToolbarOpen">Открыть прицел</system:String>
+    <system:String x:Key="ToolbarSave">Сохранить прицел</system:String>
+    <system:String x:Key="ToolbarUndo">Отменить</system:String>
+    <system:String x:Key="ToolbarRedo">Вернуть</system:String>
+    <system:String x:Key="ToolbarZoomIn">Увеличить</system:String>
+    <system:String x:Key="ToolbarZoomOut">Уменьшить</system:String>
+    <system:String x:Key="ToolbarResetZoom">Сбросить масштаб</system:String>
+    <system:String x:Key="ToolbarGrid">Сетка вкл/выкл</system:String>
+    <system:String x:Key="ToolbarValidate">Проверить</system:String>
+    <system:String x:Key="ToolbarPreview">Предпросмотр</system:String>
+
+    <!-- Panels -->
+    <system:String x:Key="FileExplorer">Проводник файлов</system:String>
+    <system:String x:Key="Folders">Папки</system:String>
+    <system:String x:Key="CodeEditor">Редактор кода</system:String>
+    <system:String x:Key="CustomSightsEditor">Редактор кастомных прицелов</system:String>
+    <system:String x:Key="TabElements">Элементы</system:String>
+    <system:String x:Key="TabProperties">Свойства</system:String>
+    <system:String x:Key="TabLayers">Слои</system:String>
+
+    <!-- Drawing Tools -->
+    <system:String x:Key="ToolLine">Линия</system:String>
+    <system:String x:Key="ToolCircle">Круг</system:String>
+    <system:String x:Key="ToolRectangle">Прямоугольник</system:String>
+    <system:String x:Key="ToolText">Текст</system:String>
+    <system:String x:Key="ToolSelect">Выбрать</system:String>
+    <system:String x:Key="ToolMove">Переместить</system:String>
+    <system:String x:Key="ToolClone">Клонировать</system:String>
+    <system:String x:Key="ToolDelete">Удалить</system:String>
+
+    <!-- Status messages -->
+    <system:String x:Key="StatusReady">Готов</system:String>
+    <system:String x:Key="StatusError">Ошибка</system:String>
+    <system:String x:Key="StatusSaving">Сохранение...</system:String>
+    <system:String x:Key="StatusLoading">Загрузка...</system:String>
+
+    <!-- Resolution display -->
+    <system:String x:Key="Resolution">Разрешение:</system:String>
+
+</ResourceDictionary>

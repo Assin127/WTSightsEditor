@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using WTSightsEditor.Services;
+using WTSightsEditor.Windows;
 
 namespace WTSightsEditor
 {
@@ -79,6 +81,47 @@ namespace WTSightsEditor
             InitializeStatusBar();
             InitializeToolManager();
             InitializeCanvas();
+
+            // Show project creation window after main window is loaded
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        /// <summary>
+        /// Handle main window loaded event
+        /// </summary>
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Unsubscribe to avoid multiple calls
+            this.Loaded -= MainWindow_Loaded;
+
+            // Show project creation window
+            ShowCreateProjectWindow();
+        }
+
+        /// <summary>
+        /// Show project creation/selection window
+        /// </summary>
+        private void ShowCreateProjectWindow()
+        {
+            var createProjectWindow = new CreateProjectWindow();
+
+            // Set dialog properties
+            createProjectWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            // Show as modal dialog
+            var result = createProjectWindow.ShowDialog();
+
+            if (result == true)
+            {
+                // Project created or loaded successfully
+                StatusText.Text = "Project loaded";
+            }
+            else
+            {
+                // User cancelled or closed the window
+                StatusText.Text = "No project loaded";
+                // Application will continue running with limited functionality
+            }
         }
 
         // ============================================================================
@@ -92,20 +135,30 @@ namespace WTSightsEditor
         {
             try
             {
-                // Get physical screen resolution using WinAPI
-                IntPtr hdc = GetDC(IntPtr.Zero);
-                int physicalWidth = GetDeviceCaps(hdc, DESKTOPHORZRES);
-                int physicalHeight = GetDeviceCaps(hdc, DESKTOPVERTRES);
-                ReleaseDC(IntPtr.Zero, hdc);
+                // Use WPF system parameters for resolution
+                double width = SystemParameters.PrimaryScreenWidth;
+                double height = SystemParameters.PrimaryScreenHeight;
 
-                ResolutionText.Text = $"{physicalWidth}x{physicalHeight}";
-                ZoomText.Text = "30%";
+                // Adjust for DPI if available
+                var source = PresentationSource.FromVisual(this);
+                if (source?.CompositionTarget != null)
+                {
+                    var dpiX = 96.0 * source.CompositionTarget.TransformToDevice.M11;
+                    var dpiY = 96.0 * source.CompositionTarget.TransformToDevice.M22;
+
+                    width = SystemParameters.PrimaryScreenWidth * (dpiX / 96.0);
+                    height = SystemParameters.PrimaryScreenHeight * (dpiY / 96.0);
+                }
+
+                ResolutionText.Text = $"{(int)width}x{(int)height}";
+                ZoomText.Text = "100%";
             }
-            catch
+            catch (Exception ex)
             {
-                // Fallback to WPF system parameters if WinAPI fails
-                ResolutionText.Text = $"{SystemParameters.PrimaryScreenWidth}x{SystemParameters.PrimaryScreenHeight}";
-                ZoomText.Text = "30%";
+                // Fallback to default resolution
+                ResolutionText.Text = "1920x1080";
+                ZoomText.Text = "100%";
+                System.Diagnostics.Debug.WriteLine($"Error getting resolution: {ex.Message}");
             }
 
             StatusText.Text = "Ready";
@@ -432,12 +485,6 @@ namespace WTSightsEditor
         }
 
         // ============================================================================
-        // PRIVATE FIELDS
-        // ============================================================================
-
-        private bool _isCustomEditorExpanded = true;      // Custom editor expanded state
-
-        // ============================================================================
         // CUSTOM SIGHTS EDITOR METHODS
         // ============================================================================
 
@@ -484,7 +531,7 @@ namespace WTSightsEditor
         /// </summary>
         private void GridSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
-            // No icon to update since we removed it
+            // Update status if needed
         }
 
         /// <summary>
@@ -493,6 +540,76 @@ namespace WTSightsEditor
         private void PreviewContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             UpdateCanvasPosition();
+        }
+
+        // ============================================================================
+        // MENU EVENT HANDLERS
+        // ============================================================================
+
+        /// <summary>
+        /// Handle New menu item click
+        /// </summary>
+        private void MenuFileNew_Click(object sender, RoutedEventArgs e)
+        {
+            ShowCreateProjectWindow();
+        }
+
+        /// <summary>
+        /// Handle Open menu item click
+        /// </summary>
+        private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
+        {
+            ShowCreateProjectWindow();
+        }
+
+        /// <summary>
+        /// Handle Exit menu item click
+        /// </summary>
+        private void MenuFileExit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        /// <summary>
+        /// Handle Zoom In menu item click
+        /// </summary>
+        private void MenuViewZoomIn_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement zoom in functionality
+            StatusText.Text = "Zoom In clicked";
+        }
+
+        /// <summary>
+        /// Handle Zoom Out menu item click
+        /// </summary>
+        private void MenuViewZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement zoom out functionality
+            StatusText.Text = "Zoom Out clicked";
+        }
+
+        /// <summary>
+        /// Handle Reset Zoom menu item click
+        /// </summary>
+        private void MenuViewResetZoom_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement reset zoom functionality
+            StatusText.Text = "Zoom reset";
+            ZoomText.Text = "100%";
+        }
+
+        /// <summary>
+        /// Handle About menu item click
+        /// </summary>
+        private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "War Thunder Sights Editor v1.0\n\n" +
+                "A tool for creating and editing custom sights for War Thunder.\n" +
+                "Created by the community for the community.",
+                "About",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
         }
     }
 }
